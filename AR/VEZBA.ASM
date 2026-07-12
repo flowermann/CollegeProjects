@@ -77,7 +77,7 @@ ldmem x.F203,r0
 stri [r2],r0
 inc r2
 dec r4
-bneq wait21             ! vrti dok ne upiöem svih 8 elemenata niza B
+bneq wait21             ! vrti dok ne upi≈°em svih 8 elemenata niza B
 
 ! kp 2.1 gotov, iskljucimo ga
 ldimm x.0,r0
@@ -262,7 +262,7 @@ ldimm x.1, r6
 and r5, r5, r6
 bneq turnoff12
 
-! ako nismo zavröili, öaljemo sledeci element niza A
+! ako nismo zavr≈°ili, ≈°aljemo sledeci element niza A
 ldrid [r1]x.0, r6   ! ucitavamo podatak sa ptrA
 stmem x.f143, r6    ! upisujemo u Data registar KP 1.2
 inc r1              ! ptrA++
