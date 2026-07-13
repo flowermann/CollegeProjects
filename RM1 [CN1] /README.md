@@ -5,7 +5,8 @@
 
 Figure 1 shows the network topology that needs to be created using Cisco Packet Tracer and subsequently configured according to the instructions provided in this document.
 
-<img width="1393" height="743" alt="Screenshot_5" src="https://github.com/user-attachments/assets/6e624de0-27c2-4e9d-a7c3-2079a5a1e4d7" />
+<img width="766" height="531" alt="image" src="https://github.com/user-attachments/assets/b2bcf10c-c641-477d-a189-0bbecb896255" />
+
 
 **Figure 1. Network Topology Blueprint**
 
