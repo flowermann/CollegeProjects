@@ -4,5 +4,6 @@ as i often abbreviate my folders in Serbian and forget to change them :)
 
 Stuff I've done so far for my classes: 
 |English Abbreviation|Class|Serbian Abbreviation|
+|--------------------|-----|--------------------|
 |[CA]|Computer Architecture |(AR)|
 |[CN]|Computer Networks 1 |(RM1)|
