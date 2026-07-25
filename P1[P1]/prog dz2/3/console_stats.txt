@@ -1,0 +1,65 @@
+DS
+	North America => 173.37
+	Europe => 136.25
+	Japan => 106.48
+	Rest of World => 37.63
+GB
+	North America => 99.41
+	Europe => 37.44
+	Japan => 54.14
+	Rest of World => 6.99
+GBA
+	North America => 85.89
+	Europe => 37.44
+	Japan => 28.58
+	Rest of World => 5.19
+GC
+	North America => 63.14
+	Europe => 20.39
+	Japan => 16.64
+	Rest of World => 3.02
+N64
+	North America => 89.69
+	Europe => 28.62
+	Japan => 26.61
+	Rest of World => 2.63
+NES
+	North America => 110.80
+	Europe => 18.82
+	Japan => 80.09
+	Rest of World => 3.42
+PS
+	North America => 223.64
+	Europe => 136.52
+	Japan => 64.41
+	Rest of World => 23.14
+PS2
+	North America => 390.84
+	Europe => 262.41
+	Japan => 59.66
+	Rest of World => 92.15
+PS3
+	North America => 189.90
+	Europe => 160.22
+	Japan => 26.25
+	Rest of World => 67.61
+PSP
+	North America => 37.56
+	Europe => 35.24
+	Japan => 14.65
+	Rest of World => 20.81
+SNES
+	North America => 60.31
+	Europe => 19.01
+	Japan => 52.33
+	Rest of World => 3.18
+Wii
+	North America => 286.67
+	Europe => 188.64
+	Japan => 49.40
+	Rest of World => 55.42
+X360
+	North America => 333.56
+	Europe => 151.80
+	Japan => 5.89
+	Rest of World => 51.98

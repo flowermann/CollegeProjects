@@ -1,0 +1,30 @@
+BEG->AMS->PRG
+	08:15-09:30 | Air Serbia | 150
+		09:50-10:35 | easyJet | 130
+		12:30-13:15 | Air France | 115
+		12:30-13:15 | Ryanair | 130
+		14:15-15:05 | easyJet | 135
+		14:15-15:10 | Emirates | 135
+		16:00-16:45 | Ryanair | 135
+		18:00-18:45 | easyJet | 140
+	09:05-10:25 | Vueling | 145
+		12:30-13:15 | Air France | 115
+		12:30-13:15 | Ryanair | 130
+		14:15-15:05 | easyJet | 135
+		14:15-15:10 | Emirates | 135
+		16:00-16:45 | Ryanair | 135
+		18:00-18:45 | easyJet | 140
+	14:10-15:00 | Air Serbia | 155
+		16:00-16:45 | Ryanair | 135
+		18:00-18:45 | easyJet | 140
+	14:10-15:05 | Vueling | 150
+		16:00-16:45 | Ryanair | 135
+		18:00-18:45 | easyJet | 140
+BEG->TIV->PRG
+	05:40-06:30 | Air Serbia | 60
+		07:15-10:00 | Ryanair | 95
+		12:00-14:00 | Ryanair | 110
+	07:40-08:30 | Wizz Air | 60
+		12:00-14:00 | Ryanair | 110
+	09:00-09:50 | Wizz Air | 62
+		12:00-14:00 | Ryanair | 110

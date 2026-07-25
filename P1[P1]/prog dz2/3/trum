@@ -1,0 +1,130 @@
+import csv
+
+def read_games(filename):
+    games = []
+    try:
+        with open(filename, newline='', encoding='utf-8') as f:
+            reader = csv.reader(f)
+            first_line = True
+            for row in reader:
+                if first_line:
+                    first_line = False  # skip header
+                else:
+                    if len(row) >= 11:
+                        games.append([
+                            row[0],             # title
+                            row[1],             # platform
+                            int(row[2]),        # year
+                            row[3],             # genre
+                            row[4],             # publisher
+                            float(row[5]),      # north america sales
+                            float(row[6]),      # europe sales
+                            float(row[7]),      # japan sales
+                            float(row[8]),      # rest of world sales
+                            float(row[9]),      # global sales
+                            float(row[10])      # rating
+                        ])
+        return games
+    except FileNotFoundError:
+        print("GRESKA", end='')
+        return []
+
+def print_top3_per_platform(games):
+    platforms_line = input()
+    platforms = [x.strip() for x in platforms_line.split(",")]
+    lines = []
+    for p in platforms:
+        filtered = [g for g in games if g[1] == p]
+        filtered.sort(key=lambda x: x[9], reverse=True)
+        top_games = []
+        for i in range(min(3, len(filtered))):
+            top_games.append(filtered[i][0])
+        lines.append(f"{p} => {' | '.join(top_games)}")
+    result = '\n'.join(lines)
+    print(result, end="")  # <--- ključna stvar: end=""
+
+def write_console_stats(games):
+    try:
+        min_sold = float(input())
+    except ValueError:
+        min_sold = 0.0
+    all_platforms = []
+    for g in games:
+        if g[1] not in all_platforms:
+            all_platforms.append(g[1])
+
+    platform_stats = []
+    for p in all_platforms:
+        na_sum = 0.0
+        eu_sum = 0.0
+        jp_sum = 0.0
+        row_sum = 0.0
+        for g in games:
+            if g[1] == p:
+                na_sum += g[5]
+                eu_sum += g[6]
+                jp_sum += g[7]
+                row_sum += g[8]
+        platform_stats.append([p, na_sum, eu_sum, jp_sum, row_sum])
+
+    filtered = []
+    for p in platform_stats:
+        count = 0
+        for val in p[1:]:
+            if val >= min_sold:
+                count += 1
+        if count >= 3:
+            filtered.append(p)
+
+    filtered.sort(key=lambda x: x[0])  # lexicographic sort by platform name
+
+    lines = []
+    for p in filtered:
+        lines.append(p[0])
+        lines.append(f"\tNorth America => {p[1]:.2f}")
+        lines.append(f"\tEurope => {p[2]:.2f}")
+        lines.append(f"\tJapan => {p[3]:.2f}")
+        lines.append(f"\tRest of World => {p[4]:.2f}")
+
+    with open("console_stats.txt", "w", encoding="utf-8") as f:
+        f.write("\n".join(lines))
+
+def write_company_stats(games):
+    try:
+        min_rating = float(input())
+    except ValueError:
+        min_rating = 0.0
+    all_publishers = []
+    for g in games:
+        if g[4] not in all_publishers:
+            all_publishers.append(g[4])
+
+    companies = []
+    for pub in all_publishers:
+        filtered_games = []
+        for g in games:
+            if g[4] == pub and g[10] >= min_rating:
+                filtered_games.append([g[0], g[10]])
+        if len(filtered_games) > 0:
+            filtered_games.sort(key=lambda x: x[1], reverse=True)
+            companies.append([pub, filtered_games])
+
+    companies.sort(key=lambda x: x[0])
+
+    lines = []
+    for comp in companies:
+        game_names = [game[0] for game in comp[1]]
+        lines.append(f"{comp[0]} => {', '.join(game_names)}")
+
+    with open("company_most_popular.txt", "w", encoding="utf-8") as f:
+        f.write("\n".join(lines))
+
+
+# --------- GLOBAL CODE -----------
+
+games = read_games("games.csv")
+
+if len(games) != 0:
+    print_top3_per_platform(games)
+    write_console_stats(games)
+    write_company_stats(games)

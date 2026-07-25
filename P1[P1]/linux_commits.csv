@@ -1,0 +1,12 @@
+commit_hash,file_name,num_additions,num_deletions,author_id
+promena1,a.txt,1,4,1
+promena1,b.txt,0,10,1
+promena1,c.txt,5,5,1
+promena2,a.txt,3,3,2
+promena2,b.txt,3,3,2
+promena3,a.txt,100,0,1
+promena4,a.txt,1,5,1
+promena5,a.txt,2,3,1
+promena6,a.txt,1,4,1
+promena7,b.txt,3,3,2
+promena7,c.txt,3,3,2

@@ -1,0 +1,3 @@
+promena1[1],{a.txt,b.txt,c.txt},25,2.00,6.33
+promena2[2],{a.txt,b.txt},12,3.00,3.00
+promena7[2],{b.txt,c.txt},12,3.00,3.00
