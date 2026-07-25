@@ -1,5 +1,5 @@
 Homework I've done for the class Programming 2, written in C. Unlike programming 1, I do actually have the project specifications for this one, but also unlike Programming 1... I've only done the first homework
-with the basic C syntax. The reasoning behind this was simple: The college and students wwere in protest of the government the entire year, and after the protests ended, we had three years to wrap up the 
+with the basic C syntax. The reasoning behind this was simple: The college and students were in protest of the government the entire year, and after the protests ended, we had three years to wrap up the 
 entire school year, both semesters, so unfortunately i did not get to finish the other one on time, which is a shame. Nonetheless, the same applies here as it does to Programming 1: these are codes 
 i do not take too seriously, and are very simple. The only reason im uploading them is out of archiving purposes, and as such, these codes arent that important. Still, i felt i should post them, so 
 heres a rough translation of the homework assignment file. 
