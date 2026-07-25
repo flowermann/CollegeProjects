@@ -8,3 +8,6 @@ Stuff I've done so far for my classes:
 |[CA]|Computer Architecture |(AR)|
 |[CN]|Computer Networks 1 |(RM1)|
 |[OOP2]|Object Oriented Programming 2|(OOP2)|
+|[DSA]|Data Structures and Algorithms|(ASP)|
+|[P1]|Programming 1|(P1)|
+|[P2]|Programming 2|(P2)|
