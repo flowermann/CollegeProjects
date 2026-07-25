@@ -1,6 +1,9 @@
 This is a homework assignment I've done for the class "Data Structures and Algorithms". The following is a rough translation of the projects specifications. Also, the file "cm240685d.cpp is the project. 
 Im not sure what i was doing back when i was writing this in January 2026, but i probably had some problems with the IDE, so i had multiple versions of the same code, more or less. 
 
+The actual tasks i was asked to do from this pdf depend on the student booklet number i have, so using that as a basis for calculation, i had to implement BBS (Blum Blum Shub) and represent the graph
+using an adjacency list.
+
 # Smart Building Sensor Network Simulator
 
 An implementation of a Smart Building Sensor System model built in C++ using Graph Data Structures. Developed as part of the Algorithms and Data Structures course at the Faculty of Electrical Engineering, University of Belgrade (ETF).
