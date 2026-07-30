@@ -3,6 +3,7 @@ package core;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Objects;
 
 public class Flight {
 	private Airport from;
@@ -51,6 +52,9 @@ public class Flight {
 	public LocalTime getDepartureTime() {
 		return departureTime;
 	}
+	public String getDepartureString() {
+		return getDepartureTime().format(formatT);		
+	}
 
 	public int getDuration() {
 		return duration;
@@ -61,5 +65,24 @@ public class Flight {
 		return "Flight [from=" + from + ", to=" + to + ", departureTime=" + departureTime + ", duration=" + duration
 				+ "]";
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(departureTime, duration, from, to);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Flight other = (Flight) obj;
+		return Objects.equals(departureTime, other.departureTime) && duration == other.duration
+				&& Objects.equals(from, other.from) && Objects.equals(to, other.to);
+	}
+	
 
 }

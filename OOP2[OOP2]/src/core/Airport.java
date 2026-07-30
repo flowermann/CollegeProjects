@@ -2,11 +2,14 @@ package core;
 
 import java.util.Objects;
 
+
 public class Airport {
 	private String code;
 	private String name;
 	private int x;
 	private int y;
+	
+	private boolean visible = true;
 
 	public Airport(String code, String name, int x, int y) throws InvalidAirportDataException {
 		// Checking code input.
@@ -34,6 +37,7 @@ public class Airport {
 		this.name = name;
 		this.x = x;
 		this.y = y;
+		
 	}
 
 	// Getters for all fields.
@@ -51,6 +55,15 @@ public class Airport {
 
 	public int getY() {
 		return y;
+	}
+	
+	public boolean isVisible() {
+		return visible;
+	}
+	
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+		
 	}
 
 	@Override
