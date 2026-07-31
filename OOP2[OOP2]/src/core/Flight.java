@@ -59,6 +59,10 @@ public class Flight {
 	public int getDuration() {
 		return duration;
 	}
+	
+	public int getDepartureInMinutes() {
+		return departureTime.getHour()*60 + departureTime.getMinute(); //returns departure time in minutes since 00:00 
+	}
 
 	@Override
 	public String toString() {

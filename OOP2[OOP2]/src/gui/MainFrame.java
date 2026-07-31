@@ -2,20 +2,26 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
 import java.io.File;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import core.Airport;
 import logic.Manager;
+import logic.Simulation;
 
 //The frame the program will be adding elements to in the user interface.
 public class MainFrame extends JFrame{
@@ -23,6 +29,13 @@ public class MainFrame extends JFrame{
 	private Tables tablesPanel;
 	private MapPanel map;
 	private Timeout timeout;
+	
+	private Simulation simulation;
+	private JLabel time;
+	private JButton start;
+	private JButton pause;
+	private JButton reset;
+	
 	
 	//Constructor: Window title, size, position and click on "x" event, alongside instantiating other panels it contains.
 	public MainFrame() {
@@ -38,6 +51,15 @@ public class MainFrame extends JFrame{
 		map = new MapPanel(); //New map 
 		map.setTimeout(timeout); //Setting the timeout field in map.
 		
+		simulation = new Simulation (e-> { //Simulation. When called upon, repaint. 
+			map.repaint();
+			if(time!=null && simulation!=null) {
+				time.setText(simulation.getFormattedTime());
+			}
+		} );
+		
+		map.setSimulation(simulation);
+		
 		//Size of panels.
 		map.setPreferredSize(new Dimension(650,600));
 		tablesPanel.setPreferredSize(new Dimension(450,600));
@@ -46,6 +68,10 @@ public class MainFrame extends JFrame{
 		add(tablesPanel, BorderLayout.EAST); //Positioning our table on the right edge of the app.
 		add(map, BorderLayout.CENTER);
 		
+		//A panel for buttons that control the simulation.
+		JPanel simulationControl = createSimulationControl();
+		add(simulationControl,BorderLayout.SOUTH);
+		
 		setupTableListener();
 		paintAirports();
 		
@@ -53,6 +79,53 @@ public class MainFrame extends JFrame{
 		
 		
 	}
+	
+	//Method that creates the panel for simulation control 
+	private JPanel createSimulationControl() {
+		JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 20));
+		start = new JButton("Start"); //Start the simulation
+		pause = new JButton("Pause"); //Pause the simulation
+		reset = new JButton("Reset"); //Reset the simulation
+		
+		time = new JLabel("00:00");
+		time.setFont(new Font("Tahoma", Font.BOLD, 20)); //Time
+		
+		start.addActionListener(e ->{ 
+			simulation.start();
+			if(timeout!=null) {
+				timeout.pause(); //When start is clicked, pause the inactivity timer.
+			}
+		
+		});
+		pause.addActionListener(e -> {
+			simulation.pause();
+			if (timeout != null) {
+				timeout.resume(); //When pause is clicked, resume the inactivity timer.
+			}
+		});
+		reset.addActionListener(e -> {
+			simulation.reset();
+			simulation.initialize(Manager.getInstance().getFlights());
+			time.setText("00:00");
+			if (timeout != null) {
+				timeout.resume(); //When reset is clicked, stop and reinitialize the simulation, resume inactivity timer.
+			}
+		});
+		
+		//Adding buttons to the newly created panel and returning it.
+		panel.add(start);
+		panel.add(pause);
+		panel.add(reset);
+		panel.add(new JLabel("Time: "));
+		panel.add(time);
+		
+		return panel;
+		
+	}
+	
+	
+	
+	
 	//Method that allows users to filter shown airports on map via checkbox.
 	private void setupTableListener() {
 		tablesPanel.getModel().addTableModelListener(e -> {
@@ -76,6 +149,13 @@ public class MainFrame extends JFrame{
 		
 		tablesPanel.refreshTables();
 		map.setAirports(airports);
+		
+		if(simulation!=null) {
+			simulation.initialize(Manager.getInstance().getFlights());
+			if(time!=null) {
+				time.setText(simulation.getFormattedTime());
+			}
+		}
 	}
 
 	private void setupMenuBar() {

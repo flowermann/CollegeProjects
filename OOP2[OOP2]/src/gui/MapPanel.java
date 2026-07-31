@@ -15,7 +15,9 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import core.Airplane;
 import core.Airport;
+import logic.Simulation;
 
 //Creating a map of all airports to show on the MainFrame.
 public class MapPanel extends JPanel {
@@ -25,6 +27,7 @@ public class MapPanel extends JPanel {
 	
 	private Timer blinkTimer; //timer the program used to make the selected airport blink red.
 	private boolean blinkState = false; //flag to see if the selected airport should blink red.
+	private Simulation simulation;
 	private static final int RECT_SIZE = 12; //The size of the square that will be drawn at Airport coordinates.
 	
 	public MapPanel() {
@@ -59,6 +62,11 @@ public class MapPanel extends JPanel {
 		if(blinkTimer.isRunning()) {
 			blinkTimer.stop();
 		}
+		repaint();
+	}
+	
+	public void setSimulation(Simulation simulation) {
+		this.simulation = simulation;
 		repaint();
 	}
 
@@ -188,8 +196,41 @@ public class MapPanel extends JPanel {
 			//Label over every square (Airport code)
 			g2d.setFont(new Font("Calibri", Font.BOLD, 12));
 			g2d.drawString(airport.getCode(), x + RECT_SIZE + 4, y + RECT_SIZE + - 2);
-		}
 		
-	}
-	
+				}
+		if(simulation!=null) {
+			for(Airplane airplane: simulation.getActiveAirplanes()) { //The program needs to draw every active airplane on the map
+				//getting the start and end coordinates of the current airplane through Flight
+				Airport from = airplane.getFlight().getFrom();
+				Airport to = airplane.getFlight().getTo();
+				
+				// Translating the start and end coordinates of our airplane to our coordinate system
+				Point startPt = toScreenCoordinates(from.getX(), from.getY());
+				Point endPt = toScreenCoordinates(to.getX(), to.getY());
+				
+				//How much has the airplane already traveled? We will use this progress for our interpolation step.
+				double progress = (double) airplane.getElapsedTime() / airplane.getFlight().getDuration();
+		        if (progress > 1.0) progress = 1.0; // making sure our airplane doesn't overshoot the target (progress cant be more than 100%)
+		        if (progress < 0.0) progress = 0.0;
+
+		        int currentScreenX = (int) Math.round(startPt.x + progress * (endPt.x - startPt.x));//getting the current coordinates of our airplane
+		        int currentScreenY = (int) Math.round(startPt.y + progress * (endPt.y - startPt.y));
+		        
+		        //for the right trajectory, we must move our airplanes slightly
+		        int planeX = currentScreenX - RECT_SIZE / 2;
+		        int planeY = currentScreenY - RECT_SIZE / 2;
+				
+				//draw a blue circle outlined black for each airplane.
+				g2d.setColor(Color.BLUE);
+				g2d.fillOval(planeX,planeY, RECT_SIZE, RECT_SIZE);
+				g2d.setColor(Color.BLACK);
+				g2d.drawOval(planeX, planeY, RECT_SIZE, RECT_SIZE);
+				
+			}
+		 
+		
+		} 
+	} 
 }
+	
+
